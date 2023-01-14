@@ -1,0 +1,18 @@
+FROM python
+
+# Installs additional packages
+RUN pip install lightgbm pandas numpy scikit-learn google-cloud-aiplatform protobuf==3.20.3 google-cloud-storage
+
+# Downloads training data
+# RUN curl https://example-url/path-to-data/data-filename --output /root/data-filename
+ENV AIP_STORAGE_URI=gs://aakash-test-env/model/
+ENV AIP_MODEL_DIR = gs://aakash-test-env/model/
+# Copies the trainer code to the docker image.
+# COPY your-path-to/model.py /root/model.py
+COPY . ./
+
+
+# RUN chmod +x entrypoint.sh
+
+# Sets up the entry point to invoke the trainer.
+ENTRYPOINT ["python", "task.py"]
