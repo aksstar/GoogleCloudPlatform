@@ -10,9 +10,9 @@ import os
 import joblib
 
 # Initalizing variables.
-PROJECT_ID = 'aakash-test-env'
+PROJECT_ID = 'your-project-name'
 model_file_name="model.pkl" 
-bucket_name = 'aakash-test-env'
+bucket_name = 'your-project-name'
 REGION = 'us-central1'
 ARTIFACT_URI=f"gs://{bucket_name}/model"
 BLOB_NAME = 'model/' + model_file_name
