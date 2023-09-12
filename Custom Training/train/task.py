@@ -41,7 +41,7 @@ joblib.dump(model, model_file_name)
 storage_client = storage.Client(project=PROJECT_ID)
 
 # Upload model artifact to Cloud Storage
-model_directory = os.environ['AIP_MODEL_DIR']
+model_directory = os.environ['AIP_STORAGE_URI']
 print("AIP_MODEL_DIR==>>>", model_directory)
 storage_path = os.path.join(model_directory, model_file_name)
 blob = storage.blob.Blob.from_string(storage_path, client=storage.Client())

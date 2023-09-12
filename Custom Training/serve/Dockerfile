@@ -1,7 +1,7 @@
 FROM python
 
 # Installs additional packages
-RUN pip install lightgbm flask scikit-learn
+RUN pip install lightgbm flask scikit-learn google-cloud-storage
 
 ENV AIP_STORAGE_URI=gs://aakash-test-env/model
 ENV AIP_HEALTH_ROUTE=/ping

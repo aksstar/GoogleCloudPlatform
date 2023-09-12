@@ -6,9 +6,26 @@ import json
 import joblib
 app = Flask(__name__)
 
-#Loading model from AIP_MODEL_DIR path.
-model_f = "model.pkl"
-model =  joblib.load(model_f)
+
+from google.cloud import storage
+# Initalizing variables.
+PROJECT_ID = 'aakash-test-env'
+model_file_name="model.pkl" 
+bucket_name = 'aakash-test-env'
+REGION = 'us-central1'
+ARTIFACT_URI=f"gs://{bucket_name}/model"
+BLOB_NAME = 'model/' + model_file_name
+print(ARTIFACT_URI)
+# Initialise a client
+storage_client = storage.Client()
+# Create a bucket object for our bucket
+bucket = storage_client.get_bucket(bucket_name)
+# Create a blob object from the filepath
+blob = bucket.blob(BLOB_NAME)
+# Download the file to a destination
+blob.download_to_filename(model_file_name)
+
+model =  joblib.load(model_file_name)
 
 @app.route(os.environ['AIP_HEALTH_ROUTE'], methods=['GET'])
 def health_check():
